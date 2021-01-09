@@ -1,0 +1,74 @@
+<div class="window-frame">
+    <div class="window-frame-titlebar">
+        <div class="window-frame-titlebar-dragarea">
+            <app-notebook-switcher [noteId]="noteId"></app-notebook-switcher>
+        </div>
+        <app-window-controls *ngIf="!appearance.windowHasNativeTitleBar"></app-window-controls>
+    </div>
+    <div class="window-frame-overlay" *ngIf="isBusy">
+        <mat-spinner class="mt-4" [diameter]="100"></mat-spinner>
+    </div>
+    <div class="window-frame-content">
+        <div class="note-content">
+            <div class="note-content-floating">
+                <button class="note-content-floating-button" mat-fab (click)="toggleShowActions()"
+                    matTooltip="{{ 'Tooltips.Actions' | translate }}">
+                    <div class="note-content-floating-button-icon-container" [@actionIconRotation]="actionIconRotation">
+                        <span *ngIf="!canPerformActions"
+                            class="note-content-floating-button-icon-visually-centered custom-font">&#xF044;</span>
+                        <span *ngIf="canPerformActions"
+                            class="note-content-floating-button-icon custom-font">&#xF00D;</span>
+                    </div>
+                </button>
+                <button *ngIf="canPerformActions && isMarked" class="note-content-floating-button" mat-mini-fab color=""
+                    (click)="toggleNoteMark()" matTooltip="{{ 'Tooltips.UnmarkNote' | translate }}">
+                    <span class="note-content-floating-button-icon-action custom-font">&#xF004;</span>
+                </button>
+                <button *ngIf="canPerformActions && !isMarked" class="note-content-floating-button" mat-mini-fab
+                    color="" (click)="toggleNoteMark()" matTooltip="{{ 'Tooltips.MarkNote' | translate }}">
+                    <span class="note-content-floating-button-icon-action-regular custom-font">&#xF004;</span>
+                </button>
+                <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color=""
+                    (click)="exportNoteAsync()" matTooltip="{{ 'Tooltips.ExportNote' | translate }}">
+                    <span class="note-content-floating-button-icon-action custom-font">&#xF56E;</span>
+                </button>
+                <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color=""
+                    (click)="exportNoteToPdfAsync()" matTooltip="{{ 'Tooltips.ExportNoteToPdf' | translate }}">
+                    <span class="note-content-floating-button-icon-action custom-font">&#xF1C1;</span>
+                </button>
+                <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color=""
+                    (click)="printNote()" matTooltip="{{ 'Tooltips.PrintNote' | translate }}">
+                    <span class="note-content-floating-button-icon-action custom-font">&#xF02F;</span>
+                </button>
+                <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color=""
+                    (click)="deleteNoteAsync()" matTooltip="{{ 'Tooltips.DeleteNote' | translate }}">
+                    <span class="note-content-floating-button-icon-action custom-font">&#xF2ED;</span>
+                </button>
+            </div>
+            <div class="note-content-fixed" (click)="onFixedContentClick()">
+                <div class="note-content-fixed-title">
+                    <input class="note-content-fixed-title-text" type="text" [(ngModel)]="noteTitle"
+                        (ngModelChange)="onNotetitleChange($event)" (keydown)="onTitleKeydown($event)" />
+                </div>
+                <div class="note-editor" id="editor" (keydown.control.s)=strikeThrough($event)
+                    (keydown.control.1)=heading1($event) (keydown.control.2)=heading2($event)>
+                </div>
+            </div>
+            <div class="note-content-search px-1" *ngIf="canSearch">
+                <mat-form-field class="note-content-search-field mr-1" floatLabel=never>
+                    <mat-label>{{ searchPlaceHolder }}</mat-label>
+                    <input matInput type="text" #searchInput [(ngModel)]="searchText"
+                        (focus)="checkSearchPlaceHolderAsync()" (blur)="checkSearchPlaceHolderAsync()">
+                    <button mat-button *ngIf="searchText" matSuffix mat-icon-button
+                        matTooltip="{{ 'MainPage.ClearSearch' | translate }}" (click)="clearSearch()">
+                        <span class="custom-font notes-search-clearbutton">&#xF12D;</span>
+                    </button>
+                </mat-form-field>
+                <button class="custom-font notes-search-closebutton" mat-mini-fab (click)="closeSearch()"
+                    matTooltip="{{ 'Tooltips.Close' | translate }}">
+                    <span class="custom-font notes-search-clearbutton">&#xF00D;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

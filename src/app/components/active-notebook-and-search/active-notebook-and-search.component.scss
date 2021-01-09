@@ -1,0 +1,27 @@
+.notes-content-title-and-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  height: 74px;
+}
+
+.notes-content-title {
+  display: flex;
+}
+
+.notes-content-title-text {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.notes-content-search {
+  width: 200px;
+}
+
+.notes-content-search-clearbutton {
+  display: block;
+  font-family: la-solid;
+  font-size: 16px;
+  cursor: pointer;
+}

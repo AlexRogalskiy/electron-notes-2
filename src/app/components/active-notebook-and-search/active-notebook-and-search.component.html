@@ -1,0 +1,16 @@
+<div class="notes-content-title-and-search p-2 no-select">
+    <!-- Notes title -->
+    <div class="notes-content-title">
+        <h3 class="notes-content-title-text">{{ activeNotebook?.name }}</h3>
+        <div class="count-label">{{notesCount}}</div>
+    </div>
+    <!-- Search -->
+    <mat-form-field class="notes-content-search">
+        <mat-label>{{ 'MainPage.Search' | translate }}</mat-label>
+        <input matInput type="text" #searchInput [(ngModel)]="search.searchText">
+        <button mat-button *ngIf="search.searchText" matSuffix mat-icon-button
+            matTooltip="{{ 'MainPage.ClearSearch' | translate }}" (click)="search.searchText=''">
+            <span class="custom-font notes-content-search-clearbutton">&#xF12D;</span>
+        </button>
+    </mat-form-field>
+</div>

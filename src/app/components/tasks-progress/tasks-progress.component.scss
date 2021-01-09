@@ -1,0 +1,44 @@
+@import "variables";
+.tasks-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tasks-progress-count{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--fontsize-small) !important;
+}
+
+.tasks-progress-icon {
+  color: $color-grey;
+  font-size: 18px;
+  font-family: la-solid;
+}
+
+.tasks-progress-bar{
+    height: 4px;
+    width: 75px;
+    position: relative;
+}
+
+.tasks-progress-bar-handle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background-color: $color-grey;
+    z-index: 1;
+}
+
+.tasks-progress-bar-track{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 75px;
+    background-color: $color-lightgrey;
+    z-index: 0;
+}

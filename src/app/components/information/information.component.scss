@@ -1,0 +1,35 @@
+@import "variables";
+@import "theming";
+
+.contact-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.contact-item-icon-solid {
+  font-family: la-solid;
+  font-size: 28px;
+}
+
+.contact-item-icon-brands {
+  font-family: la-brands;
+  font-size: 28px;
+}
+
+.information {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.information-logo-menu{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: calc(100vw - 14px) !important;
+}
